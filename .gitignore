@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+node_modules/
+build/
+temp/
+.env
+coverage
+ormconfig.json
+dist
+
+# não atualiza o diretorio uploads mas mantém a estrutura de pastas
+uploads/*
+!uploads/.gitkeep
