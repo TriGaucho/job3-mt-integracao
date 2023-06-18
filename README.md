@@ -24,3 +24,8 @@ Babel
 npm i -D @babel/cli @babel/core @babel/node @babel/preset-env @babel/preset-typescript @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties babel-plugin-module-resolver babel-plugin-transform-typescript-metadata
 
 Criar arquivo babel.config.js
+
+
+Axios
+npm i axios
+npm i -D @types/axios
