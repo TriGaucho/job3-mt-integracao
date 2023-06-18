@@ -1,3 +1,5 @@
 //TODO criar serviço de integração com a API vuupt.
 
-//TODO migrar os serviços de importação dos dados de 
+//TODO migrar os serviços de importação dos dados do legado
+
+//TODO melhorar tabela de configuração: nome da API, release, ativo, outros

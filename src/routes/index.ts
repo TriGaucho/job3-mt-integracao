@@ -1,12 +1,12 @@
-import LoggerMiddleware from '@shared/middlewares/logger.middlewares'
 import { Router } from 'express'
+import LoggerMiddleware from '@shared/middlewares/logger.middlewares'
+
+import configuracoes from '@modules/configuracao/routes/configuracao.routes'
 
 const routes = Router()
 
 routes.use(LoggerMiddleware)
 
-routes.get('/config', (req, res) => {
-  return res.json({ mensagem: 'Conexão estabelecida !' })
-})
+routes.use('/config', configuracoes)
 
 export default routes
