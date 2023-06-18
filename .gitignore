@@ -7,6 +7,7 @@ temp/
 coverage
 ormconfig.json
 dist
+logs/
 
 # não atualiza o diretorio uploads mas mantém a estrutura de pastas
 uploads/*
