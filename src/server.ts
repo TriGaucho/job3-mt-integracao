@@ -7,6 +7,7 @@ import routes from './routes'
 
 import Logger from '@shared/logger/Logger'
 import AppError from '@shared/erros/AppError'
+import { portaApi } from '@shared/const/ambiente'
 
 const app = express()
 
@@ -35,6 +36,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(21034, () => {
-  Logger.info(`Serviço de integração em execução na porta 21034`)
+app.listen(portaApi, () => {
+  Logger.info(`Integracao carregada - porta: ${portaApi}`)
 })
