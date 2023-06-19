@@ -1,11 +1,11 @@
-import { client, database, host, password, user } from '@shared/const/ambiente'
+import { database, password, user } from '@shared/const/ambiente'
 import knex from 'knex'
 
 export default knex({
   asyncStackTraces: true,
-    client: client,
+    client: process.env.DATABASE_CLIENT,
     connection: {
-      host: host,
+      host: process.env.DATABASE_HOST,
       database: database,
       user: user,
       password: password
