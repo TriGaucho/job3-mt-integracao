@@ -7,5 +7,6 @@ const vuuptRouter = Router()
 const vuuptController = new VuuptController()
 
 vuuptRouter.get('/:tenantId', vuuptController.get)
+vuuptRouter.post('/:tenantId', vuuptController.post)
 
 export default vuuptRouter

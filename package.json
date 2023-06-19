@@ -25,6 +25,7 @@
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/knex": "^0.16.1",
+    "@types/multer": "^1.4.7",
     "@types/node": "^20.3.1",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
@@ -44,6 +45,7 @@
     "express-async-errors": "^3.1.1",
     "knex": "^2.4.2",
     "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.3.5",
     "winston": "^3.9.0"
   }

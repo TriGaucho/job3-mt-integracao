@@ -26,6 +26,10 @@ npm i -D @babel/cli @babel/core @babel/node @babel/preset-env @babel/preset-type
 Criar arquivo babel.config.js
 
 
-Axios
+Axios: https://vidafullstack.com.br/javascript/upload-de-arquivos-node-js-multer/
 npm i axios
 npm i -D @types/axios
+
+Multer:
+npm i multer
+npm i -D  @types/multer

@@ -1,4 +1,4 @@
-import express, { Request, NextFunction, Response,  } from 'express'
+import express, { Request, NextFunction, Response, } from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import 'express-async-errors'
@@ -13,8 +13,13 @@ const app = express()
 
 app.use(cors())
 
-app.use(express.json({limit: '50mb'}))
-app.use(express.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({
+  limit: '50mb',
+  extended: false,
+  parameterLimit: 2
+})
+);
 
 app.use(routes)
 
