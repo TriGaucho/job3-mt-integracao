@@ -16,7 +16,7 @@ class ImportaNfeService {
     data.append('xml', xmlNfe)
 
     try {
-      const response = await axios.post(vuuptApi.url, data, {
+      const response = await axios.post(`${vuuptApi.url}/imports/nfe`, data, {
         headers: {
           'Authorization': chave
         }

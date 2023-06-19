@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+
 import CustomersService from '../service/CustomersService'
 import ImportaNfeService from '../service/ImportaNfeService'
 
@@ -14,6 +15,7 @@ export default class VuuptController {
   }
 
   public async post(req: Request, res: Response): Promise<Response> {
+
     const { tenantId } = req.params
     const { xml } = req.body
 

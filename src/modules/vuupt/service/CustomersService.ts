@@ -16,7 +16,7 @@ class CustomersService {
 
     const { chave } = await chaveIntegracaoService.buscaTokenApi(tenantId, vuuptApi.nome)
     try {
-      const response = await axios.get(vuuptApi.url, {
+      const response = await axios.get(`${vuuptApi.url}/customers`, {
         headers: {
           'Authorization': chave
         }
