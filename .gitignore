@@ -12,3 +12,4 @@ logs/
 # não atualiza o diretorio uploads mas mantém a estrutura de pastas
 uploads/*
 !uploads/.gitkeep
+ecosystem.config.js
