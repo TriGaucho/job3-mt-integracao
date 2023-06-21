@@ -33,3 +33,7 @@ npm i -D @types/axios
 Multer:
 npm i multer
 npm i -D  @types/multer
+
+
+rm -Rf node_modules
+rm -Rf dist
