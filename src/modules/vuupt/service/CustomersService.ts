@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const axios = require('axios')
 import ChaveIntegracaoService from '@modules/chaveIntegracao/service/ChaveIntegracaoService'
 import { vuuptApi } from '@shared/const/urlIntegracao'
 import AppError from '@shared/erros/AppError'
 import Logger from '@shared/logger/Logger'
-import axios from 'axios'
 
 export default class CustomersService {
   static async delay() {
