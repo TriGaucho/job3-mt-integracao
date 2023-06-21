@@ -1,12 +1,28 @@
 import { Request, Response } from 'express'
+
 import CustomersService from '../service/CustomersService'
+import ImportaNfeService from '../service/ImportaNfeService'
 
 export default class VuuptController {
-  static async getCustumers(req: Request, res: Response): Promise<any> {
+  public async get(req: Request, res: Response): Promise<Response> {
     const { tenantId } = req.params
 
-    const result = await CustomersService.get(tenantId)
+    const customersService = new CustomersService()
 
-    if (result) return res.status(200).json(result)
+    const response = await customersService.get(tenantId)
+
+    return res.json(response)
+  }
+
+  public async post(req: Request, res: Response): Promise<Response> {
+
+    const { tenantId } = req.params
+    const { xml } = req.body
+
+    const importaNfeService = new ImportaNfeService()
+
+    const response = await importaNfeService.post(tenantId, xml)
+
+    return res.json(response)
   }
 }

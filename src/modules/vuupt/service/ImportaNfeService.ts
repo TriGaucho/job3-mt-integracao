@@ -1,23 +1,24 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
 const axios = require('axios')
+import FormData from 'form-data'
+
 import { vuuptApi } from '@shared/const/urlIntegracao';
 import AppError from '@shared/erros/AppError';
 import Logger from '@shared/logger/Logger';
 import ChaveIntegracaoService from '@modules/chaveIntegracao/service/ChaveIntegracaoService'
 
-
-class CustomersService {
-  async delay() {
-    return new Promise(resolve => setTimeout(resolve, 200))
-  }
-
-  public async get(tenantId: string) {
+class ImportaNfeService {
+  public async post(tenantId: string, xmlNfe: any) {
     // await this.delay()
     const chaveIntegracaoService = new ChaveIntegracaoService()
+    const data = new FormData()
 
     const { chave } = await chaveIntegracaoService.buscaTokenApi(tenantId, vuuptApi.nome)
+
+    data.append('xml', xmlNfe)
+
     try {
-      const response = await axios.get(`${vuuptApi.url}/customers`, {
+      const response = await axios.post(`${vuuptApi.url}/imports/nfe`, data, {
         headers: {
           'Authorization': chave
         }
@@ -26,11 +27,10 @@ class CustomersService {
       return response.data
     } catch (error) {
       Logger.error(error)
-      throw new AppError('Erro na requisição à API VUUPT');
+      throw new AppError('Erro no envio da NFE à API VUUPT.');
     }
 
   }
-
 }
 
-export default CustomersService
+export default ImportaNfeService
