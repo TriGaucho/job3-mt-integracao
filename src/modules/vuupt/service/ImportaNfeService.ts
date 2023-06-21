@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const axios = require('axios')
-import FormData from 'form-data'
+const FormData = require('form-data')
 
 import { vuuptApi } from '@shared/const/urlIntegracao';
 import AppError from '@shared/erros/AppError';
