@@ -2,10 +2,10 @@ import { configuracoes } from "@shared/const/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
-import Configs from "../entities/Configs"
+import DadosApi from "../entities/DadosApi"
 
-class ConfiguracaoRepository {
-  public async show(): Promise<Configs[] | void> {
+class DadosApiRepository {
+  public async show(): Promise<DadosApi[] | void> {
     return await knex(configuracoes)
       .then((dados) => {
         return dados
@@ -17,4 +17,4 @@ class ConfiguracaoRepository {
   }
 }
 
-export default ConfiguracaoRepository
+export default DadosApiRepository
