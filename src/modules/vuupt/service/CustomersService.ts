@@ -3,8 +3,7 @@ const axios = require('axios')
 import { vuuptApi } from '@shared/const/urlIntegracao';
 import AppError from '@shared/erros/AppError';
 import Logger from '@shared/logger/Logger';
-import ChaveIntegracaoService from '@modules/chaveIntegracao/service/ChaveIntegracaoService'
-
+import ChaveIntegracaoService from '@shared/consultaChave/service/ChaveIntegracaoService'
 
 class CustomersService {
   async delay() {
@@ -16,17 +15,17 @@ class CustomersService {
     const chaveIntegracaoService = new ChaveIntegracaoService()
 
     const { chave } = await chaveIntegracaoService.buscaTokenApi(tenantId, vuuptApi.nome)
+
     try {
       const response = await axios.get(`${vuuptApi.url}/customers`, {
         headers: {
           'Authorization': chave
         }
-      }
-      )
+      })
       return response.data
     } catch (error) {
-      Logger.error(error)
-      throw new AppError('Erro na requisição à API VUUPT');
+      Logger.error(`Erro integração ${vuuptApi.nome.toUpperCase()} - ${error}`)
+      throw new AppError(`Falha na requisição à API  ${vuuptApi.nome.toUpperCase()}`);
     }
 
   }

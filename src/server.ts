@@ -1,4 +1,4 @@
-import express, { Request, NextFunction, Response, } from 'express'
+import express, { Request,  Response } from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import 'express-async-errors'
@@ -8,6 +8,7 @@ import routes from './routes'
 import Logger from '@shared/logger/Logger'
 import AppError from '@shared/erros/AppError'
 import { portaApi } from '@shared/const/ambiente'
+import { versao } from '@shared/const/versao'
 
 const app = express()
 
@@ -23,7 +24,7 @@ app.use(express.urlencoded({
 
 app.use(routes)
 
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((error: Error, req: Request, res: Response) => {
   Logger.error(error)
   if (error instanceof AppError) {
     const errorObject = {
@@ -42,5 +43,5 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 })
 
 app.listen(portaApi, () => {
-  Logger.info(`Integracao carregada - porta: ${portaApi}`)
+  Logger.info(`Integracao: ${versao} / porta: ${portaApi}`)
 })

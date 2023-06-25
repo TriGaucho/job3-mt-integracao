@@ -5,11 +5,11 @@ const FormData = require('form-data')
 import { vuuptApi } from '@shared/const/urlIntegracao';
 import AppError from '@shared/erros/AppError';
 import Logger from '@shared/logger/Logger';
-import ChaveIntegracaoService from '@modules/chaveIntegracao/service/ChaveIntegracaoService'
+import ChaveIntegracaoService from '@shared/consultaChave/service/ChaveIntegracaoService'
 
 class ImportaNfeService {
-  public async post(tenantId: string, xmlNfe: any) {
-    // await this.delay()
+  public async post(tenantId: string, xmlNfe: string) {
+
     const chaveIntegracaoService = new ChaveIntegracaoService()
     const data = new FormData()
 
@@ -26,7 +26,7 @@ class ImportaNfeService {
       )
       return response.data
     } catch (error) {
-      Logger.error(error)
+      Logger.error(`Erro integração ${vuuptApi.nome.toUpperCase()} - ${error}`)
       throw new AppError('Erro no envio da NFE à API VUUPT.');
     }
 
