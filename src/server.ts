@@ -42,6 +42,6 @@ app.use((error: Error, req: Request, res: Response) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(portaApi, () => {
+app.listen(portaApi, '127.0.0.1', () => {
   Logger.info(`Integracao: ${versao} / porta: ${portaApi}`)
 })
