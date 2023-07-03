@@ -17,6 +17,7 @@ class ImportaNfeService {
 
     data.append('xml', xmlNfe)
 
+    Logger.info(`iniciando integração ${vuuptApi.nome.toUpperCase()} / NFE: ${xmlNfe} - chave: ${chave}`)
     try {
       const response = await axios.post(`${vuuptApi.url}/imports/nfe`, data, {
         headers: {
@@ -24,6 +25,7 @@ class ImportaNfeService {
         }
       }
       )
+      Logger.info(`Integração ${vuuptApi.nome.toUpperCase()} realizada com sucesso - ${response.data}`)
       return response.data
     } catch (error) {
       Logger.error(`Erro integração ${vuuptApi.nome.toUpperCase()} - ${error}`)

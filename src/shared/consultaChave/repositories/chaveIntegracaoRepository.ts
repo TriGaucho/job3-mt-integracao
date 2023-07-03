@@ -9,7 +9,7 @@ class ChaveIntegracaoRepository {
 
     return knex(chaveApi).where({tenantId, nome: integracao})
     .then((res) => {
-      Logger.info(`Token/Chave ${integracao.toUpperCase()} obtida com sucesso.` )
+      Logger.info(`Token/Chave ${integracao.toUpperCase()} obtida com sucesso. - ${res[0]}` )
       return res[0]
     })
     .catch(erro => {
