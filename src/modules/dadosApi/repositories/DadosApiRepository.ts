@@ -1,4 +1,4 @@
-import { configuracoes } from "@shared/const/banco"
+import { tabelaConfiguracoes } from "@shared/const/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
@@ -6,7 +6,7 @@ import DadosApi from "../entities/DadosApi"
 
 class DadosApiRepository {
   public async show(): Promise<DadosApi[] | void> {
-    return await knex(configuracoes)
+    return await knex(tabelaConfiguracoes)
       .then((dados) => {
         return dados
       })
