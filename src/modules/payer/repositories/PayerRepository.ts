@@ -1,4 +1,4 @@
 import * as mongoose from "mongoose";
-import callbackPayerSchema from "../entities/PayerAny";
+import callbackPayerSchema from "../model/CallbackModel";
 
 export default mongoose.model('callbackPayer', callbackPayerSchema);
