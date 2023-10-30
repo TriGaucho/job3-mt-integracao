@@ -65,9 +65,9 @@ class EnvioPagamento {
     private async login() {
         try {
             const resp = await axios.post(urlLogin, {
-                clientId: client,
-                username: user,
-                password: pass
+                // clientId: client,
+                // username: user,
+                // password: pass
             })
             return resp.data.AuthenticationResult
         } catch (error) {
