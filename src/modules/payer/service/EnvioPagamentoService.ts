@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError';
 import axios from 'axios'
-import { pagamentoMock } from '../mock/pagamentoMock';
+import 'dotenv/config'
 
 import PagamentoRepository from '../repositories/PagamentoRepository'
 import { client } from '@shared/const/ambiente';
@@ -40,8 +40,7 @@ class EnvioPagamento {
                 correlationId: dados.correlationId,
                 flow: "SYNC",
                 automationName: "JOB3",
-                // callbackUrl: "https://webhook.site/c8bab2dc-64df-40c7-b580-0abdb8f7f024",
-                callbackUrl: "https://hml-integracao.job3.com.br/payer/callback-payer",
+                callbackUrl: process.env.MONGO_INITDB_ROOT_USERNAME,
                 receiver: dados.receiver,
                 message: dados.message
             }
