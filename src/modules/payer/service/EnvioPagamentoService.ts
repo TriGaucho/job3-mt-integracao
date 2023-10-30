@@ -3,6 +3,8 @@ import axios from 'axios'
 import { pagamentoMock } from '../mock/pagamentoMock';
 
 import PagamentoRepository from '../repositories/PagamentoRepository'
+import { client } from '@shared/const/ambiente';
+import { pass, urlEnvioPagamento, urlLogin, user } from '@shared/const/loginPayer';
 
 interface IPagamento {
     origin: String;
@@ -31,8 +33,6 @@ class EnvioPagamento {
         
         await this.salvaPagamento(dados);
 
-        const urlEnvioPagamento = 'https://v4kugeekeb.execute-api.us-east-1.amazonaws.com/prod-stage/cloud-notification/create';
-
         const dadosPagamento = {
             type: "INPUT",
             origin: dados.origin,
@@ -40,7 +40,8 @@ class EnvioPagamento {
                 correlationId: dados.correlationId,
                 flow: "SYNC",
                 automationName: "JOB3",
-                callbackUrl: "https://webhook.site/c8bab2dc-64df-40c7-b580-0abdb8f7f024",
+                // callbackUrl: "https://webhook.site/c8bab2dc-64df-40c7-b580-0abdb8f7f024",
+                callbackUrl: "https://hml-integracao.job3.com.br/payer/callback-payer",
                 receiver: dados.receiver,
                 message: dados.message
             }
@@ -63,13 +64,11 @@ class EnvioPagamento {
     }
 
     private async login() {
-        const urlLogin = 'https://bk07exvx19.execute-api.us-east-1.amazonaws.com/dev-stage/oauth/login';
-
         try {
             const resp = await axios.post(urlLogin, {
-                clientId: "3veb9e18d50ceqes38o1i8mlph",
-                username: "comercial@job3.com.br",
-                password: "Mlc090927*"
+                clientId: client,
+                username: user,
+                password: pass
             })
             return resp.data.AuthenticationResult
         } catch (error) {
