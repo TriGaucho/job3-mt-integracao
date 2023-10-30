@@ -3,8 +3,7 @@ import axios from 'axios'
 import 'dotenv/config'
 
 import PagamentoRepository from '../repositories/PagamentoRepository'
-import { client } from '@shared/const/ambiente';
-import { pass, urlEnvioPagamento, urlLogin, user } from '@shared/const/loginPayer';
+import { passMongo, urlEnvioPagamento, urlLogin, userMongo, clientMongo } from '@shared/const/loginPayer';
 
 interface IPagamento {
     origin: String;
@@ -65,9 +64,9 @@ class EnvioPagamento {
     private async login() {
         try {
             const resp = await axios.post(urlLogin, {
-                // clientId: client,
-                // username: user,
-                // password: pass
+                clientId: clientMongo,
+                username: userMongo,
+                password: passMongo
             })
             return resp.data.AuthenticationResult
         } catch (error) {
