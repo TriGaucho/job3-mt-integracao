@@ -6,14 +6,16 @@ class ConexaoMongo{
     //TODO componentizar e garantir dados de login como variaveis.
     createConnection() {
         const bancoDados = process.env.MONGO_DATABASE
+        const userName = process.env.MONGO_INITDB_ROOT_USERNAME
+        const pass = process.env.MONGO_INITDB_ROOT_PASSWORD
         
         mongoose.connect(`mongodb://localhost/${bancoDados}`,  {
             authSource: "admin",
-            user: process.env.MONGO_INITDB_ROOT_USERNAME,
-            pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
+            user: userName,
+            pass: pass,
         })
         mongoose.pluralize(null);
-        Logger.info(`Contectado: ${bancoDados}.`)
+        Logger.info(`Contectado em ${bancoDados}/${userName}.`)
     }
 }
 
