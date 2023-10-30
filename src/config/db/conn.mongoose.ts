@@ -9,11 +9,7 @@ class ConexaoMongo{
         const userName = process.env.MONGO_INITDB_ROOT_USERNAME
         const pass = process.env.MONGO_INITDB_ROOT_PASSWORD
         
-        mongoose.connect(`mongodb://localhost/${bancoDados}`,  {
-            authSource: "admin",
-            user: userName,
-            pass: pass,
-        })
+        mongoose.connect(`mongodb://${userName}:${pass}@localhost/${bancoDados}`)
         mongoose.pluralize(null);
         Logger.info(`Contectado em ${bancoDados}/${userName}.`)
     }
