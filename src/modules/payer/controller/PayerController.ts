@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import PayerService from '../service/PayerService'
+import PayerService from '../service/CallbackPayerService'
 import LoginService from '../service/LoginService'
 import EnvioPagamentoService from '../service/EnvioPagamentoService'
 

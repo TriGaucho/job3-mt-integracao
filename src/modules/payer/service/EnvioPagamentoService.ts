@@ -2,6 +2,8 @@ import AppError from '@shared/erros/AppError';
 import axios from 'axios'
 import { pagamentoMock } from '../mock/pagamentoMock';
 
+import PagamentoRepository from '../repositories/PagamentoRepository'
+
 interface IPagamento {
     origin: String;
     correlationId: String;
@@ -27,6 +29,8 @@ interface IMessage {
 class EnvioPagamento {
     public async envioPagamento(dados: IPagamento) {
         
+        await this.salvaPagamento(dados);
+
         const urlEnvioPagamento = 'https://v4kugeekeb.execute-api.us-east-1.amazonaws.com/prod-stage/cloud-notification/create';
 
         const dadosPagamento = {
@@ -71,6 +75,10 @@ class EnvioPagamento {
         } catch (error) {
             return error
         }
+    }
+
+    private async salvaPagamento(pagamento: any) {
+        return await PagamentoRepository.create({ pagamento: pagamento })
     }
 }
 
