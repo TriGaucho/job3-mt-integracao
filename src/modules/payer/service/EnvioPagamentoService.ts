@@ -39,7 +39,7 @@ class EnvioPagamento {
                 correlationId: dados.correlationId,
                 flow: "SYNC",
                 automationName: "JOB3",
-                callbackUrl: process.env.MONGO_INITDB_ROOT_USERNAME,
+                callbackUrl: process.env.URL_CALLBACK_PAYER,
                 receiver: dados.receiver,
                 message: dados.message
             }
