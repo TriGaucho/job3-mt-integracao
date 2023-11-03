@@ -29,7 +29,7 @@ interface IMessage {
 }
 
 class EnvioPagamento {
-    public async envioPagamento(dados: IPagamento, tenandId: string) {
+    public async envioPagamento(dados: IPagamento, tenantId: string) {
         
         const loginService = new LoginPayerService();
         const idTokenPayer = await loginService.loginPayer();
@@ -41,7 +41,8 @@ class EnvioPagamento {
                 correlationId: dados.correlationId,
                 flow: "SYNC",
                 automationName: "JOB3",
-                callbackUrl: process.env.URL_CALLBACK_PAYER+'/'+tenandId,
+                callbackUrl: process.env.URL_CALLBACK_PAYER+'/'+tenantId
+                ,
                 receiver: dados.receiver,
                 message: dados.message
             }

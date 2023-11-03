@@ -36,11 +36,11 @@ export default class PayerController {
 
     public async pagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
-        const { tenandId } = req.params
+        const { tenantId } = req.params
 
         const envioPagamentoService = new EnvioPagamentoService();
        
-        const response = await envioPagamentoService.envioPagamento(body, tenandId)
+        const response = await envioPagamentoService.envioPagamento(body, tenantId)
        
         return res.json(response) 
     }
