@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import PayerService from '../service/CallbackPayerService'
-import LoginService from '../service/LoginService'
+import LoginPayerService from '../service/LoginPayerService'
 import EnvioPagamentoService from '../service/EnvioPagamentoService'
 
 export default class PayerController {
@@ -12,32 +12,31 @@ export default class PayerController {
         return res.json(response) 
     }
 
-    public async create(req: Request, res: Response): Promise<Response> {
+    public async salvaRetornoPagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
 
         const payerService = new PayerService();
        
-        const response = await payerService.create(body)
+        const response = await payerService.salvaRetornoPagamento(body)
        
-        return res.json(response) 
+        return res.json(response)
     }
 
     public async login(req: Request, res: Response): Promise<Response> {
-        const { clientId, username, password } = req.body
-
-        const loginService = new LoginService();
+        const loginService = new LoginPayerService();
        
-        const response = await loginService.post(clientId, username, password)
+        const response = await loginService.loginPayer()
        
         return res.json(response) 
     }
 
     public async pagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
+        const { tenandId } = req.params
 
         const envioPagamentoService = new EnvioPagamentoService();
        
-        const response = await envioPagamentoService.envioPagamento(body)
+        const response = await envioPagamentoService.envioPagamento(body, tenandId)
        
         return res.json(response) 
     }

@@ -1,25 +1,64 @@
 import * as mongoose from "mongoose";
 
-const receiverSchema = new mongoose.Schema({
-    companyId: { trype: String },
-    storeId: { trype: String },
-    terminalId: { trype: String },
-})
+interface IMessage {
+    command: string;
+    value: number;
+    paymentMethod: string;
+    paymentType: string;
+    paymentMethodSubType: string;
+    installments: number;
+}
+interface IReceiver {
+    companyId: string;
+    storeId: string;
+    terminalId: string;
+}
+
+interface IData {
+    correlationId: string;
+    flow: string;
+    automationName: string;
+    callbackUrl: string;
+    receiver: IReceiver;
+}
+
+interface IPagamento {
+    type: string;
+    origin: string;
+    data: IData;
+    message: IMessage;
+}
 
 const messageSchema = new mongoose.Schema({
-    command: { trype: String },
+    command: { type: String },
     value: { type: Number },
-    paymentMethod: { trype: String },
-    paymentType: { trype: String },
-    paymentMethodSubType: { trype: String },
+    paymentMethod: { type: String },
+    paymentType: { type: String },
+    paymentMethodSubType: { type: String },
     installments: { type: Number },
 })
 
-const pagamentoSchema = new mongoose.Schema({
-    origin: { trype: String },
-    correlationId: { trype: String },
-    receiver: { type: receiverSchema },
-    message: { type: messageSchema }
+const receiverSchema = new mongoose.Schema({
+    companyId: { type: String },
+    storeId: { type: String },
+    terminalId: { type: String }
 })
 
-export default pagamentoSchema;
+const dataSchema = new mongoose.Schema({
+    correlationId: { type: String },
+    flow: { type: String },
+    automationName: { type: String },
+    callbackUrl: { type: String },
+    receiver: { receiverSchema }
+})
+
+const pagamentoSchema = new mongoose.Schema({
+    type: { type: String },
+    origin: { type: String },
+    data: { dataSchema },
+    message: { messageSchema }
+})
+
+// export default pagamentoSchema;
+
+export const Pagamentos = mongoose.model<IPagamento>('pagamento', pagamentoSchema);
