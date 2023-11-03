@@ -7,10 +7,10 @@ import ConsultaPagamento from '../service/ConsultaPagementoService'
 export default class PayerController {
     public async consultaPagamento(req: Request, res: Response): Promise<Response> {
         const { correlationId } = req.body
-
+        const { tenantId } = req.params
         const consultaPagamento = new ConsultaPagamento();
        
-        const response = await consultaPagamento.get(correlationId)
+        const response = await consultaPagamento.get(correlationId, tenantId)
        
         return res.json(response) 
     }
@@ -18,10 +18,10 @@ export default class PayerController {
     //TODO verifica nomeclatura
     public async salvaRetornoPagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
-        const { tenandId } = req.params
+        const { tenantId } = req.params
         const payerService = new PayerService();
        
-        const response = await payerService.salvaRetornoPagamento(body, tenandId)
+        const response = await payerService.salvaRetornoPagamento(body, tenantId)
        
         return res.json(response)
     }
