@@ -6,11 +6,11 @@ import ConsultaPagamento from '../service/ConsultaPagementoService'
 
 export default class PayerController {
     public async consultaPagamento(req: Request, res: Response): Promise<Response> {
-        const { correlationId } = req.body
+        const { correlationId } = req.query
         const { tenantId } = req.params
         const consultaPagamento = new ConsultaPagamento();
        
-        const response = await consultaPagamento.get(correlationId, tenantId)
+        const response = await consultaPagamento.get(String(correlationId), tenantId)
        
         return res.json(response) 
     }
