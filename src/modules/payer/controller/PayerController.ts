@@ -18,10 +18,10 @@ export default class PayerController {
     //TODO verifica nomeclatura
     public async salvaRetornoPagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
-
+        const { tenandId } = req.params
         const payerService = new PayerService();
        
-        const response = await payerService.salvaRetornoPagamento(body)
+        const response = await payerService.salvaRetornoPagamento(body, tenandId)
        
         return res.json(response)
     }
