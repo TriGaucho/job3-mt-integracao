@@ -8,7 +8,7 @@ class ConsultaPagamento {
                 tenantId: tenantId
             },
             {
-                correlationId: 1, statusTransaction: 1, _id: 0
+                correlationId: 1, statusTransaction: 1, authorizerId: 1, _id: 0
             }
         )
     }
