@@ -11,7 +11,6 @@ interface IPagamento {
     correlationId: String;
     receiver: IReceiver;
     message: IMessage;
-
 }
 
 interface IReceiver {
@@ -52,6 +51,7 @@ class EnvioPagamento {
 
         try {
 
+            //TODO isolar validação
             const validate = await axios.post(urlValidacaoPagamento, dadosPagamento, {
                 headers: {
                     'Authorization': idTokenPayer
@@ -60,11 +60,14 @@ class EnvioPagamento {
 
             if (validate.data.error) throw new AppError(validate.data)
 
+            //Isolar envio pagamento
             const resp = await axios.post(urlEnvioPagamento, dadosPagamento, {
                 headers: {
                     'Authorization': idTokenPayer
                 }
             })
+
+            //TODO garantir os dados salvos corretamente no banco mongo
             const save = await pagamento.save();
             return resp.data
         } catch (error) {
