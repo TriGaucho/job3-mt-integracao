@@ -5,7 +5,7 @@ const payerbRouter = Router()
 
 const payerController = new PayerController()
 
-payerbRouter.get('/callback-payer', payerController.get)
+payerbRouter.get('/consulta-pagamento/:tenantId', payerController.consultaPagamento)
 payerbRouter.post('/callback-payer/:tenantId', payerController.salvaRetornoPagamento)
 payerbRouter.get('/login-payer', payerController.login)
 payerbRouter.post('/pagamento-payer/:tenantId', payerController.pagamento)

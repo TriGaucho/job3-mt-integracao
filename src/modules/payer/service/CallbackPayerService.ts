@@ -1,13 +1,9 @@
-import RetornoPagamentoCallbackRepository from "../repositories/RetornoPagamentoCallbackRepository";
+import { CallbackPayer } from "../model/CallbackModel";
 
 class PayerService {
-    async get() {
-        return await RetornoPagamentoCallbackRepository.find({})
-    }
-
-    //TODO melhorar schema(objeto) salvo no Mongo
     async salvaRetornoPagamento(responseCallback: any) {
-        return await RetornoPagamentoCallbackRepository.create({ responseCallback: responseCallback })
+        const callbackPayer = new CallbackPayer(responseCallback)
+        return await callbackPayer.save(responseCallback)
     }
 }
 

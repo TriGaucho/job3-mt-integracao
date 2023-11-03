@@ -2,16 +2,20 @@ import { Request, Response } from 'express'
 import PayerService from '../service/CallbackPayerService'
 import LoginPayerService from '../service/LoginPayerService'
 import EnvioPagamentoService from '../service/EnvioPagamentoService'
+import ConsultaPagamento from '../service/ConsultaPagementoService'
 
 export default class PayerController {
-    public async get(req: Request, res: Response): Promise<Response> {
-        const payerService = new PayerService();
+    public async consultaPagamento(req: Request, res: Response): Promise<Response> {
+        const { correlationId } = req.body
+
+        const consultaPagamento = new ConsultaPagamento();
        
-        const response = await payerService.get()
+        const response = await consultaPagamento.get(correlationId)
        
         return res.json(response) 
     }
 
+    //TODO verifica nomeclatura
     public async salvaRetornoPagamento(req: Request, res: Response): Promise<Response> {
         const { body } = req
 
