@@ -5,7 +5,7 @@ class PayerService {
         return await RetornoPagamentoCallbackRepository.find({})
     }
 
-    //TODO melhorar schema(objto) salvo no Mongo
+    //TODO melhorar schema(objeto) salvo no Mongo
     async salvaRetornoPagamento(responseCallback: any) {
         return await RetornoPagamentoCallbackRepository.create({ responseCallback: responseCallback })
     }

@@ -41,7 +41,7 @@ class EnvioPagamento {
                 correlationId: dados.correlationId,
                 flow: "SYNC",
                 automationName: "JOB3",
-                callbackUrl: process.env.URL_CALLBACK_PAYER,
+                callbackUrl: process.env.URL_CALLBACK_PAYER+'/'+tenandId,
                 receiver: dados.receiver,
                 message: dados.message
             }
