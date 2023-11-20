@@ -9,6 +9,7 @@ import Logger from '@shared/logger/Logger'
 import AppError from '@shared/erros/AppError'
 import { portaApi } from '@shared/const/ambiente'
 import { versao } from '@shared/const/versao'
+import DataBase from '@config/db/conn.mongoose'
 
 const app = express()
 
@@ -42,6 +43,9 @@ app.use((error: Error, req: Request, res: Response) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(portaApi, '127.0.0.1', () => {
+const _db = new DataBase();
+_db.createConnection()
+
+app.listen(Number(portaApi), '127.0.0.1', () => {
   Logger.info(`Integracao: ${versao} / porta: ${portaApi}`)
 })

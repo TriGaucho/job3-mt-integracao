@@ -1,4 +1,4 @@
-import { chaveApi } from "@shared/const/banco"
+import { tabelaChaveApi } from "@shared/const/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
@@ -7,7 +7,7 @@ class ChaveIntegracaoRepository {
   public async consultaChave(tenantId: string, integracao: string) {
     Logger.info(`Inicia consulta Token/Chave ${integracao.toUpperCase()}.` )
 
-    return knex(chaveApi).where({tenantId, nome: integracao})
+    return knex(tabelaChaveApi).where({tenantId, nome: integracao})
     .then((res) => {
       Logger.info(`Token/Chave ${integracao.toUpperCase()} obtida com sucesso. - ${res[0]}` )
       return res[0]
