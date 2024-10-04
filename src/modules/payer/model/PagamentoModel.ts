@@ -1,62 +1,52 @@
 import * as mongoose from "mongoose";
 
-interface IMessage {
-    command: string;
-    value: number;
-    paymentMethod: string;
-    paymentType: string;
-    paymentMethodSubType: string;
-    installments: number;
-}
-interface IReceiver {
-    companyId: string;
-    storeId: string;
-    terminalId: string;
-}
 
-interface IData {
+interface IPagamento {
+  type: string;
+  origin: string;
+  data: {
     correlationId: string;
     flow: string;
     automationName: string;
     callbackUrl: string;
-    receiver: IReceiver;
+    receiver: {
+      companyId: string;
+      storeId: string;
+      terminalId: string;
+    },
+    message: {
+      command: string;
+      value: number;
+      paymentMethod: string;
+      paymentType: string;
+      paymentMethodSubType: string;
+      installments: number;
+    }
+  }
 }
 
-interface IPagamento {
-    type: string;
-    origin: string;
-    data: IData;
-    message: IMessage;
-}
-
-const messageSchema = new mongoose.Schema({
-    command: { type: String },
-    value: { type: Number },
-    paymentMethod: { type: String },
-    paymentType: { type: String },
-    paymentMethodSubType: { type: String },
-    installments: { type: Number },
-})
-
-const receiverSchema = new mongoose.Schema({
-    companyId: { type: String },
-    storeId: { type: String },
-    terminalId: { type: String }
-})
-
-const dataSchema = new mongoose.Schema({
+const pagamentoSchema = new mongoose.Schema({
+  type: { type: String },
+  origin: { type: String },
+  data: {
     correlationId: { type: String },
     flow: { type: String },
     automationName: { type: String },
     callbackUrl: { type: String },
-    receiver: { receiverSchema }
-})
-
-const pagamentoSchema = new mongoose.Schema({
-    type: { type: String },
-    origin: { type: String },
-    data: { dataSchema },
-    message: { messageSchema }
+    receiver: {
+      companyId: { type: String },
+      storeId: { type: String },
+      terminalId: { type: String }
+    },
+    message: {
+      command: { type: String },
+      value: { type: Number },
+      paymentMethod: { type: String },
+      paymentType: { type: String },
+      paymentMethodSubType: { type: String },
+      installments: { type: Number },
+    }
+  },
 })
 
 // export default pagamentoSchema;

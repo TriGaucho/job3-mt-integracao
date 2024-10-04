@@ -5,13 +5,14 @@ class ConsultaPagamento {
         return CallbackPayer.findOne(
             {
                 correlationId: correlation,
-                tenantId: tenantId
+                // tenantId: tenantId
             },
             {
-                correlationId: 1, 
-                statusTransaction: 1, 
-                authorizerId: 1, 
-                flag: 1, 
+                correlationId: 1,
+                statusTransaction: 1,
+                authorizerId: 1,
+                flag: 1,
+                // flagCard: 1,
                 _id: 0
             }
         )
