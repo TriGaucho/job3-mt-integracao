@@ -11,8 +11,30 @@ export default class PayerController {
         const consultaPagamento = new ConsultaPagamento();
        
         const response = await consultaPagamento.get(String(correlationId), tenantId)
-       
-        return res.json(response) 
+
+        if(!response) {return res.json({message: 'Pagamento não encontrado'})}
+        let flag
+        
+        if (!response.flagCard && !response.flag) {
+            flag = 'Não informado';
+        } 
+
+        if (response.flagCard && !response.flag) {
+            flag = response.flagCard.replace(/\s+/g, '');
+        }
+
+        if (response.flag) {
+            flag = response.flag.replace(/\s+/g, '');
+        }
+
+        const responseAux = {
+            correlationId: response.correlationId,
+            statusTransaction: response.statusTransaction,
+            authorizerId: response.authorizerId,
+            flag: flag
+        }
+
+        return res.json(responseAux) 
     }
 
     //TODO verifica nomeclatura

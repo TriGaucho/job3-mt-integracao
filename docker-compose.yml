@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: container-job3-postgres
+    environment:
+      POSTGRES_USER: dev-local-user
+      POSTGRES_PASSWORD: senha@2024
+      POSTGRES_DB: bd-dev-pg
+    ports:
+      - "5432:5432"
+    volumes:
+      - job3-pg-volume:/bitnami/postgresql
+  
+  mysql:
+    image: mysql:latest
+    container_name: container-job3-mysql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: senha@2024
+      MYSQL_DATABASE: bd-dev-local
+    ports:
+      - "3306:3306"
+    volumes:
+      - job3-mysql-volume:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    container_name: container-job3-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: job3
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: bd-dev-local
+    ports:
+      - "27017:27017"
+    volumes:
+      - job3-mongo-volume:/data/db
+
+volumes:
+  job3-pg-volume:
+  job3-mysql-volume:
+  job3-mongo-volume:

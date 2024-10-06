@@ -19,6 +19,7 @@ interface ICallback {
     rejectionInfo: string;
     acquirer: string;
     flag: string;
+    flagCard: string;
     thirdPartyId: string;
     authorizerId: string;
     authorizerUsn: string;
@@ -49,6 +50,7 @@ const callbackShcema = new mongoose.Schema({
     rejectionInfo: { type: String },
     acquirer: { type: String },
     flag: { type: String },
+    flagCard: { type: String },
     thirdPartyId: { type: String },
     authorizerId: { type: String },
     authorizerUsn: { type: String },
