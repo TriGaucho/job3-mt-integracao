@@ -10,6 +10,17 @@ import LoginPayerService from './LoginPayerService';
 class EnvioPagamento {
   public async envioPagamento(dados: any, tenantId: string) {
 
+    const { receiver, message } = dados
+
+    const dadosMessage = {
+      command: message.command,
+      value: String(message.value),
+      paymentMethod: message.paymentMethod,
+      paymentType: message.paymentType,
+      paymentMethodSubType: message.paymentMethodSubType,
+      installments: message.installments,
+    }
+
     const loginService = new LoginPayerService();
     const idTokenPayer = await loginService.loginPayer();
 
@@ -22,8 +33,8 @@ class EnvioPagamento {
         automationName: "JOB3",
         callbackUrl: process.env.URL_CALLBACK_PAYER + '/' + tenantId
         ,
-        receiver: dados.receiver,
-        message: dados.message
+        receiver: receiver,
+        message: dadosMessage
       }
     }
 

@@ -16,7 +16,7 @@ interface IPagamento {
     },
     message: {
       command: string;
-      value: number;
+      value: string;
       paymentMethod: string;
       paymentType: string;
       paymentMethodSubType: string;
@@ -40,7 +40,7 @@ const pagamentoSchema = new mongoose.Schema({
     },
     message: {
       command: { type: String },
-      value: { type: Number },
+      value: { type: String },
       paymentMethod: { type: String },
       paymentType: { type: String },
       paymentMethodSubType: { type: String },
