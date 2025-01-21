@@ -1,6 +1,6 @@
 import axios from 'axios'
 import 'dotenv/config'
-
+import Logger from '@shared/logger/Logger';
 import AppError from '@shared/erros/AppError';
 import { urlEnvioPagamento, urlValidacaoPagamento } from '@shared/const/loginPayer';
 import { Pagamentos } from '../model/PagamentoModel';
@@ -58,6 +58,8 @@ class EnvioPagamento {
           }
       })
 
+      Logger.info({ dadosPagamento: dadosPagamento, response: resp.data })
+      
       //TODO garantir os dados salvos corretamente no banco mongo
 
       const save = await pagamento.save(dadosPagamento);
