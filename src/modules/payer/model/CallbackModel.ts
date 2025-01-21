@@ -9,7 +9,7 @@ interface ICallback {
     storeId: string;
     terminalId: string;
     transactionDateTime: string;
-    value: number;
+    value: string;
     paymentType: string;
     paymentMethod: string;
     paymentMethodSubType: string;
@@ -40,7 +40,7 @@ const callbackShcema = new mongoose.Schema({
     storeId: { type: String },
     terminalId: { type: String },
     transactionDateTime: { type: String },
-    value: { type: Number },
+    value: { type: String },
     paymentType: { type: String },
     paymentMethod: { type: String },
     paymentMethodSubType: { type: String },
