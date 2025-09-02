@@ -1,0 +1,43 @@
+{
+    "level": "info",
+    "message": {
+        "dadosPagamento": {
+            "data": {
+                "automationName": "JOB3",
+                "callbackUrl": "https://hml-integracao.job3.com.br/payer/callback-payer/00367224000136",
+                "correlationId": "TRANSACAO210125154341",
+                "flow": "SYNC",
+                "message": {
+                    "command": "payment",
+                    "installments": 0,
+                    "paymentMethod": "CARD",
+                    "paymentMethodSubType": null,
+                    "paymentType": "DEBIT",
+                    "value": "1.67"
+                },
+                "receiver": {
+                    "companyId": "000777",
+                    "storeId": "0001",
+                    "terminalId": "03"
+                }
+            },
+            "origin": "CUPOM",
+            "type": "INPUT"
+        },
+        "response": {
+            "SendMessageResponse": {
+                "ResponseMetadata": {
+                    "RequestId": "39267746-5a7e-5aa2-b387-174fb75edd6e"
+                },
+                "SendMessageResult": {
+                    "MD5OfMessageAttributes": null,
+                    "MD5OfMessageBody": "ce1617605f962d22b1ad62f32fddb8f5",
+                    "MD5OfMessageSystemAttributes": null,
+                    "MessageId": "d6494989-8225-453e-8bed-46a7e64db19b",
+                    "SequenceNumber": null
+                }
+            }
+        }
+    },
+    "timestamp": "2025-01-21T18:43:44.675Z"
+}

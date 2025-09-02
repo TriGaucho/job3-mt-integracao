@@ -31,6 +31,7 @@ export default class PayerController {
             correlationId: response.correlationId,
             statusTransaction: response.statusTransaction,
             authorizerId: response.authorizerId,
+            acquirerCNPJ: response.acquirerCNPJ,
             flag: flag
         }
 

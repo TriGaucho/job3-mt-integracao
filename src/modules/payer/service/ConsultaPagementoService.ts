@@ -9,6 +9,7 @@ class ConsultaPagamento {
             },
             {
                 correlationId: 1,
+                acquirerCNPJ: 1,
                 statusTransaction: 1,
                 authorizerId: 1,
                 flag: 1,

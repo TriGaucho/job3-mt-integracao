@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
 interface ICallback {
+    acquirerCNPJ: string
     tenantId: string
     correlationId: string;
     origin: string;
@@ -31,6 +32,7 @@ interface ICallback {
     reducedCustomerPaymentReceipt: string;
 }
 const callbackShcema = new mongoose.Schema({
+    acquirerCNPJ: { type: String },
     tenantId: { type: String },
     correlationId: { type: String },
     origin: { type: String },
