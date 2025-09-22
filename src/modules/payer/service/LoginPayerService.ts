@@ -14,8 +14,9 @@ class LoginPayerService {
             if (!resp.data.AuthenticationResult.IdToken) throw new AppError('Não foi possível se autenticar na Payer.')
             return resp.data.AuthenticationResult.IdToken
         } catch (error) {
-            Logger.error(error)
-            throw new AppError('Não foi possível se autenticar na Payer.')
+            Logger.error(JSON.stringify(error))
+            console.error(JSON.stringify(error))
+            throw new AppError('Erro ao tentar se autenticar na Payer.')
         }
     }
 }
