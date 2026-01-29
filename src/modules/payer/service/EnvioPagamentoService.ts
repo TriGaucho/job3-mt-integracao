@@ -23,7 +23,7 @@ class EnvioPagamento {
 
     const loginService = new LoginPayerService();
     const idTokenPayer = await loginService.loginPayer();
-
+    const urlCallback = process.env.URL_CALLBACK_PAYER
     const dadosPagamento: any = {
       type: "INPUT",
       origin: dados.origin,
@@ -31,7 +31,7 @@ class EnvioPagamento {
         correlationId: dados.correlationId,
         flow: "SYNC",
         automationName: "JOB3",
-        callbackUrl: process.env.URL_CALLBACK_PAYER + '/' + tenantId,
+        callbackUrl: urlCallback + '/' + tenantId,
         receiver: receiver,
         message: dadosMessage
       }
@@ -51,6 +51,8 @@ class EnvioPagamento {
 
       if (validate.data.error) {throw new AppError(`Erro na validação do pagamento: ${validate.data}`)}
 
+      Logger.info(`Valição do pagamento na Payer OK!`)
+
       //Isolar envio pagamento
       Logger.info(`Criando pagamento na Payer: ${JSON.stringify(dadosPagamento)}`)
       const resp = await axios.post(`${urlApiPayer}/cloud-notification/create`, dadosPagamento, {
@@ -59,6 +61,7 @@ class EnvioPagamento {
           }
       })
 
+      Logger.info(`Pagamento criado na Payer com sucesso!`)
       Logger.info({ dadosPagamento: dadosPagamento, response: resp.data })
       
       //TODO garantir os dados salvos corretamente no banco mongo
@@ -66,7 +69,9 @@ class EnvioPagamento {
       const save = await pagamento.save(dadosPagamento);
       return resp.data
     } catch (error) {
-      return error
+      Logger.error(JSON.stringify(error))
+      console.error(JSON.stringify(error))  
+      throw new AppError(`Erro no envio do pagamento para a Payer: ${JSON.stringify(error)}`)
     }
   }
 }
