@@ -1,8 +1,8 @@
-import axios from 'axios'
-import 'dotenv/config'
-import Logger from '@shared/logger/Logger';
+import { urlApiPayer } from '@shared/const/loginPayer';
 import AppError from '@shared/erros/AppError';
-import { urlEnvioPagamento, urlValidacaoPagamento } from '@shared/const/loginPayer';
+import Logger from '@shared/logger/Logger';
+import axios from 'axios';
+import 'dotenv/config';
 import { Pagamentos } from '../model/PagamentoModel';
 import LoginPayerService from './LoginPayerService';
 
@@ -43,7 +43,7 @@ class EnvioPagamento {
     try {
 
       //TODO isolar validação
-      const validate = await axios.post(urlValidacaoPagamento, dadosPagamento, {
+      const validate = await axios.post(`${urlApiPayer}/cloud-notification/validate-webhook`, dadosPagamento, {
           headers: {
               'Authorization': idTokenPayer
           }
@@ -52,7 +52,7 @@ class EnvioPagamento {
       if (validate.data.error) throw new AppError(validate.data)
 
       //Isolar envio pagamento
-      const resp = await axios.post(urlEnvioPagamento, dadosPagamento, {
+      const resp = await axios.post(`${urlApiPayer}/cloud-notification/create`, dadosPagamento, {
           headers: {
               'Authorization': idTokenPayer
           }
