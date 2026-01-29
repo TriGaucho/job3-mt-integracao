@@ -31,8 +31,7 @@ class EnvioPagamento {
         correlationId: dados.correlationId,
         flow: "SYNC",
         automationName: "JOB3",
-        callbackUrl: process.env.URL_CALLBACK_PAYER + '/' + tenantId
-        ,
+        callbackUrl: process.env.URL_CALLBACK_PAYER + '/' + tenantId,
         receiver: receiver,
         message: dadosMessage
       }
@@ -42,19 +41,21 @@ class EnvioPagamento {
 
     try {
 
+      Logger.info(`Validando pagamento na Payer: ${JSON.stringify(dadosPagamento)}`)
       //TODO isolar validação
       const validate = await axios.post(`${urlApiPayer}/cloud-notification/validate-webhook`, dadosPagamento, {
           headers: {
-              'Authorization': idTokenPayer
+              'Authorization': `Bearer ${idTokenPayer}`
           }
       })
 
-      if (validate.data.error) throw new AppError(validate.data)
+      if (validate.data.error) {throw new AppError(`Erro na validação do pagamento: ${validate.data}`)}
 
       //Isolar envio pagamento
+      Logger.info(`Criando pagamento na Payer: ${JSON.stringify(dadosPagamento)}`)
       const resp = await axios.post(`${urlApiPayer}/cloud-notification/create`, dadosPagamento, {
           headers: {
-              'Authorization': idTokenPayer
+              'Authorization': `Bearer ${idTokenPayer}`
           }
       })
 
