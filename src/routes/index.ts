@@ -8,7 +8,7 @@ import payer from '@modules/payer/routes/payer.routes'
 
 const routes = Router()
 
-routes.use(LoggerMiddleware)
+// routes.use(LoggerMiddleware)
 
 routes.use('/config', dadosApi)
 routes.use('/vuupt', vuupt)
